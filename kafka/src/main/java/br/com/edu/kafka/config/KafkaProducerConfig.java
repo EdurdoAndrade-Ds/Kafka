@@ -2,10 +2,11 @@ package br.com.edu.kafka.config;
 
 import br.com.edu.kafka.record.OrderRecord;
 
-import com.fasterxml.jackson.databind.ser.std.StringSerializer;
+import org.apache.kafka.common.serialization.StringSerializer;
 import org.apache.kafka.clients.producer.ProducerConfig;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.kafka.core.DefaultKafkaProducerFactory;
 import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.kafka.core.ProducerFactory;
@@ -14,12 +15,14 @@ import org.springframework.kafka.support.serializer.JsonSerializer;
 import java.util.HashMap;
 import java.util.Map;
 
+@Configuration
 public class KafkaProducerConfig {
 
-    @Value(value = "{spring.kafka.bootstrap-servers}")
+    @Value(value = "${spring.kafka.bootstrap-servers}")
     private String bootstrapAddress;
 
     // record esta aq apenas para estudo, ele esta simulando um dto
+    @Bean
     public ProducerFactory<String, OrderRecord> orderRecordProducerFactory() {
         Map<String, Object> props = new HashMap<>();
         // para evitar usar o cabecalho do Kafka
