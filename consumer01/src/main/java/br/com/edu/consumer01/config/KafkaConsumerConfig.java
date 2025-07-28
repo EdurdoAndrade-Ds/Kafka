@@ -48,7 +48,7 @@ public class KafkaConsumerConfig {
     }
 
     // cria o listenner que vai processar tudo das configs de OrderRecord com as configs acima
-    @Bean(name = "orderKafkaListenerContainerFactory")
+    @Bean
     public ConcurrentKafkaListenerContainerFactory<String, OrderRecord> orderKafkaListenerContainerFactory() {
         ConcurrentKafkaListenerContainerFactory<String, OrderRecord> factory = new ConcurrentKafkaListenerContainerFactory<>();
         factory.setConsumerFactory(orderConsumerFactory());
